@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>SQUAWK | Caption Builder</title>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="An easy way to add captions and subtitles to your short videos" >
+	<meta name="keywords" content="caption editor, subtitle editor, subtitles, add subtitles, video captions, video subtitles" >
+	<meta name="author" content="Dale Bailey" >
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- FONT -->
+	<link href='http://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,600,800,600italic,300|Libre+Baskerville' rel='stylesheet' type='text/css'>
+
+	<!-- FAVICON -->
+
+	<!-- SOCIAL -->
+	
+	</head>
+	<body>
+		<div id="container">
+			<header>
+				<h1>Squawk</h1>
+				<h3> Add Captions To Your Videos</h3>
+			</header>
+			<section>
+				<div id="upload_nav">
+					<span id="urlSpan1"><h2>Insert url here</h2></span>
+					<span id="urlSpan3">
+						<button id="load">Load</button>
+					</span>
+					<span id="urlSpan2">
+						<input type="text" id="userUrl">
+					</span>
+				</div>
+			</section>	
+			<section>
+				<video id="video" controls poster="images/poster.png">
+					<source />
+					<track label="English subtitles" kind="subtitles" srclang="en" src="captionTest.vtt" default>
+				</video>
+			</section>
+			<section>
+				<h2>Press and hold the record button for the duration of each caption</h2>
+				<button id="playButton">Play</button>
+				<button id="record" disabled>Record Caption</button>
+			</section>
+			<section id="captionSection">
+				<h2>Enter your text for each caption</h2>
+				<ol id="timeList"></ol>
+			</section>
+			<section>
+				<h2>Press the generate button to get your subtitle file!</h2>
+				<button id="generate" disabled>Generate!</button>
+				<button id="create" disabled>Create file</button>
+				<a download="captionTest.vtt" id="downloadlink" style="display: none">
+					<button>Download</button>
+				</a>
+				<br>
+				<br>
+				<textarea id="code" rows="20" cols="80" disabled placeholder="All captions must be saved before you can generate your file."></textarea>
+				<!-- use <code></code> tags? -->
+				<p>Test url: http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4</p>
+			</section>
+			<footer>
+				<h2>Get social</h2>
+				<ul id="iconNav">
+					<li class="icon"><a href=""><img src="images/icons/facebook.png" alt="facebook icon"></a></li>
+					<li class="icon"><a href=""><img src="images/icons/twitter.png" alt="twitter icon"></a></li>
+					<li class="icon"><a href=""><img src="images/icons/youtube.png" alt="youtube icon"></a></li>
+					<li class="icon"><a href=""><img src="images/icons/mail.png" alt="email icon"></a></li>
+				</ul>
+				<div id="credit">
+					<p>Created by Dale Bailey</p>
+				</div>
+			</footer>
+		</div>
+		<!-- JAVASCRIPT -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="js/script.js"></script>
+		<script src="js/saveFile.js"></script>
+	</body>
+</html>
