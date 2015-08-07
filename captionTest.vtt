@@ -1,23 +1,0 @@
-WEBVTT
-
-1
-00:00:12.197 --> 00:00:16.237
-- This is a test subtitle
-
-2
-00:00:20.138 --> 00:00:24.573
-- For squawk a caption adding app
-
-3
-00:00:26.988 --> 00:00:29.426
-- Big Buck Bunny
-
-4
-00:00:33.071 --> 00:00:36.438
-- Squawk!
-
-WEBVTT 1 00:00:00.000 --> 00:00:00.000 - 2 00:00:00.000 --> 00:00:00.000 - 3 00:00:00.000 --> 00:00:00.000 - 4 00:00:00.000 --> 00:00:00.000 - <div class="row">
-        <?php echo $form->labelEx($model,'description'); ?>
-        <?php echo $form->textArea($model,'description', array('rows'=>15, 'cols'=>75)); ?>
-        <?php echo $form->error($model,'description'); ?>
-</div>00
