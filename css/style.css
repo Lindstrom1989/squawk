@@ -84,24 +84,29 @@ section:nth-child(n+3) {
 
 button {
 	font-family: 'Open Sans', sans-serif;
-	border: 2px solid #00b7ff;
-	background-color: #fff;
-	color: #595959;
-	padding: 5px 20px;
+	border: 2px solid #fff;
+	background-color: transparent;
+	color: #fff;
+	padding: 5px 20px;/* maybe 10 & 30? */
 	margin: 2px 5px;
 	border-radius: 40px;
-	-webkit-border-radius: 40px;
+	-webkit-border-radius: 80px;
 	-moz-border-radius: 40px;
 }
 
 button:hover {
 	background-color: #00b7ff;
 	color: #fff;
+	border-color: #00b7ff;
 }
 
 button:disabled {
-	color: black;
 	opacity: 0.5;
+}
+
+button:disabled:hover {
+	background-color: transparent;
+	border-color: #fff;
 }
 
 #record:active {
@@ -146,15 +151,15 @@ video {
 	content: counter(step-counter, decimal-leading-zero);
 	width: 16px;
 	height: 16px;
-	background-color: #fff;
-	color: #595959;
+	background-color: transparent;
+	color: #fff;
 	font-size: 0.75em;
 	font-family: 'Open Sans', sans-serif;
 	text-align: center;
 	border-radius: 50%;
 	padding: 5px;
 	margin: 20px 5px 20px 0px;
-	border: 2px solid #00b7ff;
+	border: 2px solid #fff;
 	display: inline-block;
 	float: left;
 }
