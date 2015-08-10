@@ -17,9 +17,8 @@ This is a project for my learning and progression with various web technologies,
 - [x] Only enable record button whilst video is playing
 - [x] Turn play button into play/pause button
 - [ ] Disable play button if no media is loaded
-- [ ] Optimise with jQuery
-- [ ] Optimise repeated code
-- [ ] Optimise function parts to smaller functions to be reused
+- [x] Optimise repeated code
+- [x] Optimise function parts to smaller functions to be reused
 - [ ] Possibly pass data from captions into an object
 - [ ] Change the tick when saved to a pseudo : before for that list item or input?
 
