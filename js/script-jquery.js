@@ -19,27 +19,26 @@ console.log('A PROGRAM FOR CREATING SUBTITLE FILES IN .vtt FORMAT');
 
 // ** VARIABLES **
 var videoUrl;
-var loadButton = document.getElementById('load');
-var playButton = document.getElementById('playButton');
-var recordButton = document.getElementById('record');
-var video = document.getElementById('video');
+var $loadButton = $('#load');
+var $playButton = $('#playButton');
+var $recordButton = $('#record');
+var $video = $('#video');
 var buttonDown;
 var buttonUp;
 var listId = 1;
-var captionSection = document.getElementById('captionSection');
+var captionSection = $('#captionSection')[0];
 var resetCaptionsButton;
-var orderedList = document.getElementById('timeList');
+var orderedList = $('#timeList')[0];
 
-var generateButton = document.getElementById('generate');
-var createFileButton = document.getElementById('create');
-var codeOutput = document.getElementById('code');
+var generateButton = $('#generate')[0];
+var createFileButton = $('#create')[0];
+var codeOutput = $('#code')[0];
 
 // ** FUNCTIONS **
 // Add video to page
 var loadVideo = function () {
-	videoUrl = document.getElementById('userUrl').value;
-	var video = document.getElementById('video');
-	video.setAttribute('src', videoUrl);
+	videoUrl = $('#userUrl')[0].value;
+	$video.attr('src', videoUrl);
 	console.log('The video has been loaded');
 	console.log(videoUrl);
 	// Call function to check file extension and apply attribute type
@@ -55,8 +54,9 @@ function checkVideoType () {
 		alert('Squawk does not support this file type and it may not behave as expected. Squawk supports .mp4 and .ogg formats please check your url for typos or find a different format of the video');
 	}
 }
-
-// create a function that logs the time on mouse events
+// have user interaction to log time intervals
+	// create a record button that triggers an event on mousedown and mouseup
+		// create a logtime function
 var logTime = function () {
 	var timeStamp = video.currentTime.toFixed(3);
 	return timeStamp;
@@ -94,23 +94,33 @@ function convertToTimeFormat (time) {
 // Create a caption list item
 var addCaptionHolder = function (down, up) {
 	console.log('Time stamp added to caption number: ' +listId);
-	var li = document.createElement('li');// Create li
-	li.setAttribute('id','caption' + listId);// Set unique id
-	var input = document.createElement('input');// Create caption input
-	input.setAttribute('id','input' + listId);// Set unique id
-	input.setAttribute('tabindex', listId);// Set tab index
-	input.setAttribute('type', 'text');// Set input type
-	var saveButton = document.createElement('button');// Create save button
-	// Set save button attribute to call function
-	saveButton.setAttribute('onclick', 'saveEditCaption("' + 'input' + listId + '", "save' + listId +'")');
-	var playSnippetButton = document.createElement('button');// Create play snippet button
-	// Set play snippet button attribute to call function and pass the start record time value
-	playSnippetButton.setAttribute('onclick', 'playSnippet("' +  listId + '", "' + down +'")');
-	var deleteButton = document.createElement('button');// Create delete button
-	// Set delete button attribute to call function
-	deleteButton.setAttribute('onclick','deleteCaptionHolder("' + 'caption' + listId + '")');
-	var startSpan = document.createElement('span');// Create spans for time stamp
-	var endSpan = document.createElement('span');// Create spans for time stamp
+	// Create li
+	var li = document.createElement('li');
+	// Set unique id
+	li.setAttribute('id','caption' + listId);
+	// Create caption input
+	var input = document.createElement('input');
+	// Set unique id
+	input.setAttribute('id','input' + listId);
+	// Set tab index
+	input.setAttribute('tabindex', listId);
+	// Set input type
+	input.setAttribute('type', 'text');
+	// Create save button
+	var saveButton = document.createElement('button');
+		// Set save button attribute to call function
+		saveButton.setAttribute('onclick', 'saveEditCaption("' + 'input' + listId + '", "save' + listId +'")');
+	// Create play snippet button
+	var playSnippetButton = document.createElement('button');
+		// Set play snippet button attribute to call function and pass the start record time value
+		playSnippetButton.setAttribute('onclick', 'playSnippet("' +  listId + '", "' + down +'")');
+	// Create delete button
+	var deleteButton = document.createElement('button');
+		// Set delete button attribute to call function
+		deleteButton.setAttribute('onclick','deleteCaptionHolder("' + 'caption' + listId + '")');
+	// Create spans for time stamp
+	var startSpan = document.createElement('span');
+	var endSpan = document.createElement('span');
 	// Add each aditional list item to the end
 	orderedList.appendChild(li);
 	// Add children element to list item
@@ -132,7 +142,8 @@ var addCaptionHolder = function (down, up) {
 	// Add start and end time to spans
 	startSpan.innerHTML = convertToTimeFormat(down);
 	endSpan.innerHTML = convertToTimeFormat(up);
-	listId += 1;// Add 1 to list item for next id
+	// Add 1 to list item for next id
+	listId += 1;
 	// Disable generate button untill its saved
 	console.log('not all captions are saved');
 	generateButton.setAttribute('disabled', '');
@@ -140,7 +151,7 @@ var addCaptionHolder = function (down, up) {
 	codeOutput.setAttribute('placeholder','All captions must be saved before you can generate your file.');
 }
 
-// Create function to delete caption list item, pass caption id to function
+// Delete caption list item, pass caption id to function
 function deleteCaptionHolder (captionID) {
 	console.log('Deleted: ' + captionID);
 	// Create a variable from element with passed id
@@ -150,8 +161,7 @@ function deleteCaptionHolder (captionID) {
 	// Cycle through captions and see if they are saved using checkIfAllCaptionsAreComplete function
 	var countList = orderedList.childNodes.length;
 	checkIfAllCaptionsAreComplete(countList);
-	// Call function to see if it was the last li and remove reset button if
-	removeResetButton();
+
 }
 
 // Create a function to disable/enable caption input
@@ -181,6 +191,7 @@ function saveEditCaption (inputID, buttonID) {
 		item.setAttribute('disabled','');
 		item2.innerHTML = 'Edit';
 		console.log(inputID + ' has been saved');
+		
 		if (item.parentElement.querySelector('.saveTick')) {
 
 		} else {
@@ -197,8 +208,11 @@ function saveEditCaption (inputID, buttonID) {
 
 // Function to run through list items and see if they are saved, if they are enable generate button!
 function checkIfAllCaptionsAreComplete (numberOfCaptionsToCheck) {
+	
 	for (var i = 1; i <= numberOfCaptionsToCheck; i += 1 ) {
+	
 		var checkForCompleteCaption = document.getElementById('caption' + i);
+		
 		if (checkForCompleteCaption === null) {
 			numberOfCaptionsToCheck += 1;
 		} else if (checkForCompleteCaption.querySelector('.saveTick')) {
@@ -206,6 +220,7 @@ function checkIfAllCaptionsAreComplete (numberOfCaptionsToCheck) {
 		} else {
 			break;
 		}
+
 		if (i === numberOfCaptionsToCheck) {
 			console.log('All captions are saved!');
 			generateButton.removeAttribute('disabled');
@@ -231,22 +246,16 @@ function addResetButton () {
 	} else {
 	// If it doesnt then add the reset button
 		console.log('Reset button added');
-		resetCaptionsButton = document.createElement('button');// Create reset button
+		// Create reset button
+		resetCaptionsButton = document.createElement('button');
 		// Set click attribute to call removeAllCaptions function
 		resetCaptionsButton.setAttribute('onclick','removeAllCaptions("")');
 		// Set the id of the button to be called in other functions
 		resetCaptionsButton.setAttribute('id','resetButton');
-		resetCaptionsButton.appendChild(document.createTextNode('Reset all Captions'));// Set button text
-		captionSection.appendChild(resetCaptionsButton);// Add button as a child to the and of parent element
-	}
-}
-
-// Create a function to remove reset button if no list items exhist
-function removeResetButton () {
-	if (orderedList.childNodes.length === 0) {
-		// Get the reset button by id and remove it from the dom
-		var removeResetButton = document.getElementById('resetButton');
-		captionSection.removeChild(removeResetButton);
+		// Set button text
+		resetCaptionsButton.appendChild(document.createTextNode('Reset all Captions'));
+		// Add button as a child to the and of parent element
+		captionSection.appendChild(resetCaptionsButton);
 	}
 }
 
@@ -257,10 +266,15 @@ function removeAllCaptions () {
 		orderedList.removeChild(orderedList.firstChild)
 	}
 	console.log('Removed all captions & reset button');
-	removeResetButton();// Call function to remove the reset button
-	generateButton.setAttribute('disabled', '');// Disable generate button
-	createFileButton.setAttribute('disabled','');// Disable create file button
-	listId = 1;// Reset the captions id counter
+	// Get the reset button by id and remove it from the dom
+	var removeResetButton = document.getElementById('resetButton');
+	captionSection.removeChild(removeResetButton);
+	// Disable generate button
+	generateButton.setAttribute('disabled', '');
+	// Disable create file button
+	createFileButton.setAttribute('disabled','');
+	// Reset the captions id counter
+	listId = 1;
 }
 
 // Create a function to grab data from each element
@@ -290,63 +304,69 @@ var getDataFromCaptions = function () {
 			endTime = endTime.textContent;
 			// log it
 			console.log(startTime + ' --> ' + endTime);
+			
 			// Unicode - u000a line feed, u000d carriage return
 			codeOutput.appendChild(document.createTextNode('\u000d' + i + '\u000a' ));
 			codeOutput.appendChild(document.createTextNode(startTime + ' --> ' + endTime + '\u000a' ));
 			codeOutput.appendChild(document.createTextNode(input + '\u000d'));
 		}
 	}
+	console.log(i);
 }
 
 // Enable the record button & set the play/pause button
 var enableRecord = function () {
-	recordButton.removeAttribute('disabled', '');
-	if (playButton.innerHTML === 'Play') {
-		playButton.innerHTML = 'Pause';
+	console.log('enable record');
+	$recordButton.removeAttr('disabled');
+	if ($playButton.text() === 'Play') {
+		$playButton.text('Pause');
 	}
 }
 
 // Disable the record button & set the play/pause button
 var disableRecord = function () {
-	recordButton.setAttribute('disabled', '');
-	if (playButton.innerHTML === 'Pause') {
-		playButton.innerHTML = 'Play';
+	console.log('disable record');
+	$recordButton.attr('disabled', '');
+	if ($playButton.text() === 'Pause') {
+		$playButton.text('Play');
 	}
 }
 
 // Toggle play/pause
 var playPause = function () {
-	if (playButton.innerHTML === 'Play') {
-		video.play();
-		playButton.innerHTML = 'Pause';
-	} else if (playButton.innerHTML === 'Pause') {
-		video.pause();
-		playButton.innerHTML = 'Play';
+	if ($playButton.text() === 'Play') {
+		$video[0].play();
+		$playButton.text('Pause');
+	} else if ($playButton.text() === 'Pause') {
+		$video[0].pause();
+		$playButton.text('Play');
 	}
 }
 
 // ** RUN PROGRAM **
 
 // Load video button
-loadButton.onclick = loadVideo;
+$loadButton.click(loadVideo);
 // Play button
-playButton.onclick = playPause;
+$playButton.click(playPause);
 // Record button
-recordButton.onmousedown = logDownTime;
-recordButton.onmouseup = function () {
+$recordButton.mousedown(logDownTime);
+$recordButton.mouseup(function () {
 	logUpTime();
 	// generate list item
 	addCaptionHolder(buttonDown, buttonUp);
 	// call addResetButton function
 	addResetButton();
-}
+});
 // Generate button
 generateButton.onclick = function () {
 	getDataFromCaptions();
 	createFileButton.removeAttribute('disabled');
 }
 
-video.addEventListener('play', enableRecord);
-video.addEventListener('pause', disableRecord);
-video.addEventListener('ended', disableRecord);
+
+$video.on('play', enableRecord);
+$video.on('pause', disableRecord);
+$video.on('ended', disableRecord);
+
 
