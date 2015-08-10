@@ -36,11 +36,10 @@ var codeOutput = document.getElementById('code');
 
 // ** FUNCTIONS **
 // Add video to page
-var loadVideo = function () {
+function loadVideo () {
 	videoUrl = document.getElementById('userUrl').value;
 	var video = document.getElementById('video');
 	video.setAttribute('src', videoUrl);
-	console.log('The video has been loaded');
 	console.log(videoUrl);
 	// Call function to check file extension and apply attribute type
 	checkVideoType();
@@ -53,6 +52,18 @@ function checkVideoType () {
 	video.setAttribute('type', videoExtension);
 	if (videoExtension !== 'mp4' && videoExtension !== 'ogg') {
 		alert('Squawk does not support this file type and it may not behave as expected. Squawk supports .mp4 and .ogg formats please check your url for typos or find a different format of the video');
+	}
+}
+
+// Add function that enables play button if url exhists
+function enablePlayButton () {
+	videoUrl = document.getElementById('userUrl').value;
+	if (videoUrl === '') {
+		playButton.setAttribute('disabled', '');
+		alert('A url must be entered');
+	} else {
+		playButton.removeAttribute('disabled', '');
+		console.log('The video has been loaded');
 	}
 }
 
@@ -328,7 +339,10 @@ var playPause = function () {
 // ** RUN PROGRAM **
 
 // Load video button
-loadButton.onclick = loadVideo;
+loadButton.onclick = function () {
+	loadVideo();
+	enablePlayButton();
+}
 // Play button
 playButton.onclick = playPause;
 // Record button
