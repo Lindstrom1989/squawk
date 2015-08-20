@@ -1,18 +1,21 @@
 'use strict';
+/*
+  ____                             _         _   _ 
+ / ___|  __ _ _   _  __ ___      _| | __    / | / |
+ \___ \ / _` | | | |/ _` \ \ /\ / / |/ /    | | | |
+  ___) | (_| | |_| | (_| |\ V  V /|   <     | |_| |
+ |____/ \__, |\__,_|\__,_| \_/\_/ |_|\_\    |_(_)_|
+           |_|                                     
+*/
 // problem: adding subtitles for videos on the web means learning code and takes a lot of time
 // solution: create a way to produce the code for somebody to add to there video
 
-// add an input for users video
-	// create a url input
-	// create button to insert input into video element
-	// think of a way to link youtube videos
+// TO DO LIST //
+// [x] Think of a way to link youtube videos.
+// [x] Mobile support for record button.
+// [x] Think of a way to load the output back into the video (subtitle preview).
+// [x] Check if caption input contains text.
 
-	// output times to file
-
-// create input for subtitle text
-	// add input elements to time list items
-	// add a button to comit comment
-	// add a button to edit comment
 
 console.log('  ____                             _         _   _ \r\n \/ ___|  __ _ _   _  __ ___      _| | __    \/ | \/ |\r\n \\___ \\ \/ _` | | | |\/ _` \\ \\ \/\\ \/ \/ |\/ \/    | | | |\r\n  ___) | (_| | |_| | (_| |\\ V  V \/|   <     | |_| |\r\n |____\/ \\__, |\\__,_|\\__,_| \\_\/\\_\/ |_|\\_\\    |_(_)_|\r\n           |_|                                     ');
 console.log('A PROGRAM FOR CREATING SUBTITLE FILES IN .vtt FORMAT');
@@ -45,7 +48,7 @@ function loadVideo () {
 	checkVideoType();
 }
 
-// Add function to set the video file type depending on the extension of the url
+// Function to set the video file type depending on the extension of the url
 function checkVideoType () {
 	var videoExtension = videoUrl.substr(videoUrl.lastIndexOf('.')+1);
 	var video = document.getElementById('video');
@@ -55,7 +58,7 @@ function checkVideoType () {
 	}
 }
 
-// Add function that enables play button if url exhists
+// Function that enables play button if url exhists
 function enablePlayButton () {
 	videoUrl = document.getElementById('userUrl').value;
 	if (videoUrl === '') {
@@ -67,13 +70,13 @@ function enablePlayButton () {
 	}
 }
 
-// create a function that logs the time on mouse events
+// Function that logs the time on mouse events
 var logTime = function () {
 	var timeStamp = video.currentTime.toFixed(3);
 	return timeStamp;
 }
 
-// create two functions that update down and up time using logtime function
+// Two functions that update down and up time using logtime function
 var logDownTime = function () {
 	var time = logTime();
 	buttonDown = time;
@@ -86,7 +89,7 @@ var logUpTime = function () {
 	console.log('Recording stopped at: ' + buttonUp);
 }
 
-// Create function to take the time stamp in seconds and convert it to .webvtt format (hh:mm:ss.sss)
+// Function to take the time stamp in seconds and convert it to .webvtt format (hh:mm:ss.sss)
 function convertToTimeFormat (time) {
 	var tick = time
 	var hrs = Math.floor(tick/3600);
@@ -274,7 +277,7 @@ function removeAllCaptions () {
 	listId = 1;// Reset the captions id counter
 }
 
-// Create a function to grab data from each element
+// Function to grab data from each element
 var getDataFromCaptions = function () {
 	console.log('generate called');
 	// Create a way to put data to text area
