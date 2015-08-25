@@ -16,7 +16,7 @@ This is a project for my learning and progression with various web technologies,
 - [x] Give the ability to use more video formats
 - [x] Only enable record button whilst video is playing
 - [x] Turn play button into play/pause button
-- [ ] Disable play button if no media is loaded
+- [x] Disable play button if no media is loaded
 - [x] Optimise repeated code
 - [x] Optimise function parts to smaller functions to be reused
 - [ ] Possibly pass data from captions into an object
@@ -24,18 +24,18 @@ This is a project for my learning and progression with various web technologies,
 
 ###CSS
 
-- [ ] Continue styling break points
-- [ ] Optimise to sass
+- [x] Continue styling break points
+- [x] Optimise to sass
 - [ ] Think of a better time stamp format
 - [ ] Think of a way to have the video fixed for mobile
-- [ ] Animate record button on focus
+- [x] Animate record button on focus
 
 ###HTML
 
 - [ ] Optimise layout
 - [x] Meta
 - [ ] Create more informative instructions
-- [ ] Find a talking source video
+- [x] Find a talking source video
 
 ###More ideas
 
